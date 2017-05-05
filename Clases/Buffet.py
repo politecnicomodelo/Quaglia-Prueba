@@ -1,3 +1,5 @@
+from datetime import date
+
 class Colegio(object):
     listaPersonas=[]
     listaPlatos=[]
@@ -17,12 +19,23 @@ class Colegio(object):
     def agregarPedido(self, pedidos):
         (self.listaPedido).append(pedidos)
 
+    def platosdeldia(self):
+        platosdelDia=[]
+        for pedido in self.listaPedidos:
+            if pedido.FechaEntrega == datetime.now:
+                platosdelDia.append(pedido)
+        return platosdelDia
 
-
+    def eliminarPersona(self,personovic):
+        for person in listaPersonas:
+            if person == personovic:
+                listaPersonas.remove(personovic)
+                break
 
 class Persona(object):
     Nombre=""
     Apellido=""
+    DNI=0
 
     def setNombre(self, nombre):
         self.Nombre=nombre
@@ -32,6 +45,7 @@ class Persona(object):
 
     def getDescuento(self):
         return 0
+
 
 class Alumno(Persona):
     Division=""
@@ -58,14 +72,14 @@ class Plato(object):
         self.Precio=precio
 
 class Pedido(object):
-    FechaCreacion = None
+    FechaEntrega = None
     Comprador = None
     HoraEntrega = ""
     Plato = None
     Entregado = False
 
-    def setFechaCreacion(self, fecha):
-        self.FechaCreacion=fecha
+    def setFechaEntrega(self, fecha):
+        self.FechaEntrega=fecha
 
     def setComprador(self,comprador):
         self.Comprador=comprador
