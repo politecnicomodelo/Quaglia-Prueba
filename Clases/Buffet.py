@@ -31,6 +31,14 @@ class Colegio(object):
             if person == personovic:
                 listaPersonas.remove(personovic)
                 break
+    def guardar(self):
+        f= open("arch.txt", "w")
+        for person in self.listaPersonas:
+            f.write("1" + "|" + person.Nombre + "|" + person.Apellido + "|" + person.DNI + "|" + str(person.getDescuento())+'\n')
+        for plato in self.listaPlatos:
+            f.write("2"+ "|" + plato.Nombre + "|" + plato.Precio + '\n')
+        f.close()
+
 
 class Persona(object):
     Nombre=""
