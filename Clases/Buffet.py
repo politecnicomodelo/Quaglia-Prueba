@@ -27,16 +27,30 @@ class Colegio(object):
         return platosdelDia
 
     def eliminarPersona(self,personovic):
-        for person in listaPersonas:
+        for person in self.listaPersonas:
             if person == personovic:
-                listaPersonas.remove(personovic)
+                self.listaPersonas.remove(personovic)
                 break
+
+    def eliminarPlato(self, platovic):
+        for plato in self.listaPlatos:
+            if plato == platovic:
+                self.listaPlatos.remove(platovic)
+                break
+    def eliminarPedido(self, pedidovic):
+        for pedido in self.listaPedidos:
+            if pedido == pedidovic:
+                self.listaPedidos.remove(pedidovic)
+                break
+
     def guardar(self):
         f= open("arch.txt", "w")
         for person in self.listaPersonas:
             f.write("1" + "|" + person.Nombre + "|" + person.Apellido + "|" + person.DNI + "|" + str(person.getDescuento())+'\n')
         for plato in self.listaPlatos:
-            f.write("2"+ "|" + plato.Nombre + "|" + plato.Precio + '\n')
+            f.write("2"+ "|" + plato.Nombre + "|" + str(plato.Precio) + '\n')
+        for pedi2 in self.listaPedidos:
+            f.write("3" + "|" + pedi2.FechaEntrega + "|" + pedi2.Comprador + "|" + pedi2.HoraEntrega + "|" + pedi2.Plato + "|" + str(pedi2.Entregado) + '\n')
         f.close()
 
 
@@ -53,7 +67,6 @@ class Persona(object):
 
     def getDescuento(self):
         return 0
-
 
 class Alumno(Persona):
     Division=""
@@ -80,8 +93,9 @@ class Plato(object):
         self.Precio=precio
 
 class Pedido(object):
-    FechaEntrega = None
-    Comprador = None
+    IDpedido= 0
+    FechaEntrega = ""
+    Comprador = ""
     HoraEntrega = ""
     Plato = None
     Entregado = False
@@ -100,4 +114,3 @@ class Pedido(object):
 
     def setEntregado(self, entregado):
         self.Entregado=entregado
-
